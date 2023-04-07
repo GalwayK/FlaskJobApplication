@@ -41,7 +41,7 @@ def postSubmitApplication():
 
     emailing.send_application_email(first_name, last_name, email, start_date, occupation)
 
-    flask.session["message"] = f"Thank you for applying {first_name} {last_name}!"
+    flask.session["message"] = f"<h3 id = 'success_message'> Thank you for applying {first_name} {last_name}! </h3>"
     return flask.redirect("/submitApplication")
 
 
@@ -56,7 +56,28 @@ def getViewApplications():
 @application.route("/addUser", methods=["GET"])
 def getAddUser():
     message = flask.session.pop("message") if "message" in flask.session and flask.session["message"] is not None else None
-    return flask.render_template("/admin/add_user.html", message=message)
+    return flask.render_template("/admin/add_user.html", message=message, roles=["Admin", "User"])
+
+
+@application.route("/addUser", methods=["POST"])
+def postAddUser():
+    account_name = flask.request.form["account_name"]
+    password_one = flask.request.form["passwordOne"]
+    password_two = flask.request.form["passwordTwo"]
+    list_roles = flask.request.form["list_roles"].split(",")
+    print(account_name)
+    print(password_one)
+    print(password_two)
+    print(list_roles)
+
+    error_code = 0
+    if password_two == password_one:
+        error_code = repository.insert_account(account_name, password_one, list_roles)
+
+    flask.session["message"] = f"<h3 id = 'success_message'> Successfully Added Account {account_name}! </h3>" \
+        if error_code == 1 else f"<h3 id = 'fail_message'> Error Adding Account {account_name}! </h3>"
+
+    return flask.redirect("/addUser")
 
 
 if __name__ == "__main__":

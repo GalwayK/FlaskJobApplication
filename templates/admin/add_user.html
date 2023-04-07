@@ -2,9 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Sign Up Page </title>
+    <title> Add Account </title>
+    <script defer src = "../static/scripts/add_user.js"></script>
 </head>
 <body>
+<header><h1> Add Account </h1></header>
 
+<main>
+    {% if message %}
+            {{ message|safe }}
+    {% endif %}
+    <div id = error_message> </div>
+    <form method = post action = "/addUser" id = "add_user_form">
+        <div>Account Name: <label for = "account_name"><input required type = text name = account_name id = account_name></label></div>
+        <div>Password: <label for = "passwordOne"><input required type = password name = passwordOne id = passwordOne></label></div>
+        <div>Re-enter Password: <label for = "passwordTwo"><input required type = password name = passwordTwo id = passwordTwo></label></div>
+        <div>
+            <label for = roles><select id = roles name = roles>
+                {% for role in roles %}
+                    <option value = "{{ role }}" id = "{{ role }}"> {{ role }} </option>
+                {% endfor %}
+            </select></label>
+            <div><button id = "btn_add_role"> Add Role </button></div>
+        </div>
+
+        <ul id = "role_list"></ul>
+        <div><input type = submit value = "Add Account" id = "btn_add_account"></div>
+    </form>
+</main>
+
+<footer> By Kyle Galway </footer>
 </body>
 </html>

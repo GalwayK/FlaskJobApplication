@@ -30,3 +30,5 @@ CREATE TABLE APPLICATION
     start_date date NOT NULL,
     occupation varchar(255) NOT NULL
 );
+
+INSERT INTO ROLE (role_name) values ("Admin"), ("User");
