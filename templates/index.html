@@ -12,10 +12,14 @@
     </header>
 
     <main>
-        <form>
+        {% if message %}
+            <h2 id="submit_message"> {{ message }} </h2>
+        {% endif %}
+
+        <form method = post action = "/submitForm">
             <h2> Please enter your job credentials here! </h2>
 
-            <div class = "form-group mb-4">First Name:
+            <div class = "tform-group mb-4">First Name:
                 <label for = first_name><input type = text class = "form-control" id = first_name name = first_name required></label>
             </div>
 
@@ -33,23 +37,21 @@
 
             <div id = "current_occupation" class = "form-group mb-4 btn-group-vertical">
                 <label for = "current_occupation"> Current Occupation </label>
-                <div><label for = employed class  = "btn btn-outline-secondary">Employed <input class = "btn-check" type = radio id = employed name = current_occupation required></label></div>
+                <div><label for = employed class  = "btn btn-outline-secondary">Employed <input type = radio value = "employed" id = employed name = current_occupation required></label></div>
 
-                <div><label for = unemployed class = "btn btn-outline-secondary">Unemployed <input class = "btn-check" type = radio id = unemployed name = current_occupation required></label></div>
+                <div><label for = unemployed class = "btn btn-outline-secondary">Unemployed <input type = radio value = "unemployed" id = unemployed name = current_occupation required></label></div>
 
-                <div><label for = self-employed class = "btn btn-outline-secondary">Self-employed <input class = "btn-check" type = radio id = self-employed name = current_occupation required></label></div>
+                <div><label for = self-employed class = "btn btn-outline-secondary">Self-employed <input type = radio value = "self-employed" id = self-employed name = current_occupation required></label></div>
             </div>
 
             <div class = "form-group mb-4">
-                <input class = "btn btn-secondary" type = button value = "Submit Application">
+                <input class = "btn btn-secondary" type = submit value = "Submit Application">
             </div>
         </form>
 
     </main>
 
     <footer> By Kyle Galway </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>
