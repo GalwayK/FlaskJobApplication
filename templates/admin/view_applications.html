@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> View Job Applications </title>
+</head>
+<body>
+<header><h1> View Job Applications </h1></header>
+
+<main>
+    {% if applications|length > 0 %}
+    <table>
+        <tr>
+            <td> First Name </td>
+            <td> Last Name </td>
+            <td> Email </td>
+            <td> Start Date </td>
+            <td> Occupation </td>
+            <td> Accept Application </td>
+        </tr>
+        {% for application in applications %}
+        <tr>
+            <td> {{ application[0] }} </td>
+            <td> {{ application[1] }} </td>
+            <td> {{ application[2] }} </td>
+            <td> {{ application[3] }} </td>
+            <td> {{ application[4] }} </td>
+            <td><a href = "/acceptApplication"><button> Accept Application </button></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <h2> No Applications to Display! </h2>
+    {% endif %}
+</main>
+
+<footer> By Kyle Galway </footer>
+</body>
+</html>
