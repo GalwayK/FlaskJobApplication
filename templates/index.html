@@ -2,16 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Industrious Industries Job Application Site </title>
+    <title> Industrious Industries Job Applications </title>
 </head>
 <body>
-<header><h1> Welcome to the Industrious Industries Job Application Site </h1></header>
+<header><h1> Industrious Industries Job Applications </h1></header>
 
 <main>
+    {% if message %}
+            {{ message|safe }}
+    {% endif %}
+
+    <h2> Welcome! Please select an option below! </h2>
     <div><a href = "/submitApplication"><button> Submit a Job Application </button></a></div>
-    <div><a href = "/viewApplications"><button>View Job Applications</button></a></div>
+    <div><a href = "/viewApplications"><button> View Job Applications </button></a></div>
     <div><a href = "/addUser"><button> Add User </button></a></div>
     <div><a href = "/signIn"><button> Sign In </button></a></div>
+    <div> { } </div>
 </main>
 
 <footer> By Kyle Galway </footer>

@@ -63,3 +63,18 @@ def insert_account_role(account_id, role_id):
     cursor.execute(insert_statement, (account_id, role_id))
     cursor.connection.commit()
     return cursor.rowcount
+
+
+def read_role_id_by_account_id(account_id):
+    connection = sqlite3.Connection("./instance/data.db")
+    select_statement = "SELECT * FROM ACCOUNT_ROLE where account_id = ?"
+    result = connection.execute(select_statement, (account_id,)).fetchall()
+    return result
+
+
+def read_role_name_by_role_id(role_id):
+    connection = sqlite3.Connection("./instance/data.db")
+    select_statement = "SELECT role_name FROM ROLE where role_id = ?"
+    result = connection.execute(select_statement, (role_id,)).fetchone()
+    print(result)
+    return result[0]

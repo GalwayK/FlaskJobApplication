@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Sign In Page </title>
+    <title> Add Account </title>
+    <script defer src = "../static/scripts/sign_in.js"></script>
 </head>
 <body>
+<header><h1> Sign In </h1></header>
 
+<main>
+    {% if message %}
+            {{ message|safe }}
+    {% endif %}
+
+    <form method = post action = "/signIn">
+        <label for  = "username"> Enter Username: </label>
+        <div><input type = text name = username id = username></div>
+
+        <label for = "password"> Enter Password: </label>
+        <div><input type = text name = "password" id = "password"></div>
+
+        <div><input type = submit value = "Sign In"></div>
+
+    </form>
+</main>
+<footer><p> By Kyle Galway </p></footer>
 </body>
 </html>

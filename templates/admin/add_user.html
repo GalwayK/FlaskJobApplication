@@ -12,13 +12,13 @@
     {% if message %}
             {{ message|safe }}
     {% endif %}
-    <div id = error_message> </div>
+
     <form method = post action = "/addUser" id = "add_user_form">
-        <div>Account Name: <label for = "account_name"><input required type = text name = account_name id = account_name></label></div>
-        <div>Password: <label for = "passwordOne"><input required type = password name = passwordOne id = passwordOne></label></div>
-        <div>Re-enter Password: <label for = "passwordTwo"><input required type = password name = passwordTwo id = passwordTwo></label></div>
+        <div><label for = "account_name"> Account Name: <input required type = text name = account_name id = account_name></label></div>
+        <div><label for = "passwordOne"> Password: <input required type = password name = passwordOne id = passwordOne></label></div>
+        <div><label for = "passwordTwo"> Re-enter Password: <input required type = password name = passwordTwo id = passwordTwo></label></div>
         <div>
-            <label for = roles><select id = roles name = roles>
+            <label for = roles> Select Account Roles: <select id = roles name = roles>
                 {% for role in roles %}
                     <option value = "{{ role }}" id = "{{ role }}"> {{ role }} </option>
                 {% endfor %}
