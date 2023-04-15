@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> View Job Applications </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Industrious Industries Job Applications - View Applications </title>
 </head>
 <body>
-<header><h1> View Job Applications </h1></header>
+<header><h1> Industrious Industries Job Applications </h1></header>
 
 <main>
     {% if applications|length > 0 %}
@@ -32,6 +33,15 @@
     {% else %}
         <h2> No Applications to Display! </h2>
     {% endif %}
+
+    {% if account and 'username' in account %}
+
+        <p class = user-message> Logged in as {{ account['username'] }} </p>
+
+    {% endif %}
+    <nav>
+        <div><a href = "/"><button> Return to Index </button></a></div>
+    </nav>
 </main>
 
 <footer> By Kyle Galway </footer>

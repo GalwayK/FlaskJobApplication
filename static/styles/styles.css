@@ -1,0 +1,121 @@
+body
+{
+    font-family: verdana;
+    font-weight: 300;
+    margin: 0px;
+}
+
+h1, h2
+{
+    font-weight: 200;
+}
+
+header, footer
+{
+    border: thin black solid;
+    min-height: 10vh;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+main
+{
+    min-height: 79vh;
+}
+
+.font-large
+{
+    font-size: 25px;
+}
+
+.font-middle
+{
+    font-size: 18px;
+}
+
+.wide
+{
+    width: 100%;
+}
+
+.flex-parent
+{
+    display: flex;
+}
+
+.flex-child
+{
+    margin: 3vh 15vh;
+}
+
+.gap-small
+{
+    gap: 1vh;
+}
+
+.column
+{
+    flex-direction: column;
+}
+
+.row
+{
+    flex-direction: row;
+}
+
+.space-between
+{
+    justify-content: space-between;
+    align-items: center;
+}
+
+.space-evenly
+{
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.start
+{
+    justify-content: start;
+    align-items: center;
+}
+
+.center
+{
+    justify-content: center;
+    align-items: center;
+}
+
+.child-end
+{
+    margin-top: auto;
+    margin-bottom: 5vh;
+}
+
+.link
+{
+    height: 5vh;
+    font-size: 16px;
+    border-radius: 15px;
+}
+
+.link:hover
+{
+    cursor: pointer;
+}
+
+.link-large
+{
+    width: 25vh;
+}
+
+.link-small
+{
+    width: 15vh;
+}
+
+.bordered
+{
+    border: thin black solid;
+}

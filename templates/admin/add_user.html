@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Add Account </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Industrious Industries Job Applications - Add Account </title>
     <script defer src = "../static/scripts/add_user.js"></script>
 </head>
 <body>
-<header><h1> Add Account </h1></header>
+<header><h1> Industrious Industries Job Applications </h1></header>
 
 <main>
     {% if message %}
@@ -29,6 +30,14 @@
         <ul id = "role_list"></ul>
         <div><input type = submit value = "Add Account" id = "btn_add_account"></div>
     </form>
+       {% if account and 'username' in account %}
+
+        <p class = user-message> Logged in as {{ account['username'] }} </p>
+
+    {% endif %}
+    <nav>
+        <div><a href = "/"><button> Return to Index </button></a></div>
+    </nav>
 </main>
 
 <footer> By Kyle Galway </footer>

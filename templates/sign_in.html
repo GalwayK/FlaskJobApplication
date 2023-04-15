@@ -2,13 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Add Account </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Industrious Industries Job Applications - Sign In </title>
     <script defer src = "../static/scripts/sign_in.js"></script>
 </head>
 <body>
-<header><h1> Sign In </h1></header>
+<header class = "flex-parent row space-between wide">
+    <h1 class = "flex-child font-large"> Industrious Industries </h1>
+
+    <div class = "flex-child">
+    {% if account %}
+
+        <a href = "/signOut"><button class = "link link-small"> Sign Out </button></a>
+
+    {% else %}
+
+        <a href = "/signIn"><button class = "link link-small"> Sign In </button></a>
+
+    {% endif %}
+    </div>
+</header>
 
 <main>
+    <h2> Please sign in below </h2>
     {% if message %}
             {{ message|safe }}
     {% endif %}
@@ -23,7 +39,17 @@
         <div><input type = submit value = "Sign In"></div>
 
     </form>
+
+    {% if account and 'username' in account %}
+
+        <p class = user-message> Logged in as {{ account['username'] }} </p>
+
+    {% endif %}
+    <nav>
+        <div><a href = "/"><button> Return to Index </button></a></div>
+    </nav>
 </main>
-<footer><p> By Kyle Galway </p></footer>
+
+<footer class = "flex-parent column center wide font-middle"><p> By Kyle Galway </p></footer>
 </body>
 </html>

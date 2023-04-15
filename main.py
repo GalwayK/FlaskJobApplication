@@ -1,6 +1,5 @@
 import os
 import datetime
-
 import bcrypt
 import flask
 from flask import Flask
@@ -25,7 +24,7 @@ def getIndex():
     account = flask.session.get("current_user") if "current_user" in flask.session and flask.session["current_user"] \
                                                    is not None else None
 
-    return flask.render_template("/index.html", message=message)
+    return flask.render_template("/index.html", message=message, account=account)
 
 
 @application.route("/submitApplication", methods=["GET"])
@@ -33,7 +32,13 @@ def getSubmitApplication():
     message = flask.session.pop("message") if "message" in flask.session and flask.session["message"] is not None \
         else None
 
-    return flask.render_template("/submit_application.html", message=message)
+    account = flask.session.get("current_user") if "current_user" in flask.session and flask.session["current_user"] \
+                                                   is not None else None
+
+    if account and ("Admin" in account["roles"] or "User" in account["roles"]):
+        return flask.render_template("/submit_application.html", message=message, account=account)
+    else:
+        return flask.redirect("/forbidden")
 
 
 @application.route("/submitApplication", methods=["POST"])
@@ -49,7 +54,7 @@ def postSubmitApplication():
 
     emailing.send_application_email(first_name, last_name, email, start_date, occupation)
 
-    flask.session["message"] = f"<h3 id = 'success_message'> Thank you for applying {first_name} {last_name}! </h3>"
+    flask.session["message"] = f"<p id = 'success_message'> Thank you for applying {first_name} {last_name}! </p>"
     return flask.redirect("/submitApplication")
 
 
@@ -58,9 +63,16 @@ def getViewApplications():
     message = flask.session.pop("message") if "message" in flask.session and flask.session["message"] is not None \
         else None
 
-    applications = repository.select_applications()
+    account = flask.session.get("current_user") if "current_user" in flask.session and flask.session["current_user"] \
+                                                   is not None else None
 
-    return flask.render_template("admin/view_applications.html", message=message, applications=applications)
+    if account and "Admin" in account["roles"]:
+        applications = repository.select_applications()
+
+        return flask.render_template("admin/view_applications.html", message=message, applications=applications,
+                                     account=account)
+    else:
+        return flask.redirect("/forbidden")
 
 
 @application.route("/addUser", methods=["GET"])
@@ -68,7 +80,13 @@ def getAddUser():
     message = flask.session.pop("message") if "message" in flask.session and flask.session["message"] is not None \
         else None
 
-    return flask.render_template("/admin/add_user.html", message=message, roles=["Admin", "User"])
+    account = flask.session.get("current_user") if "current_user" in flask.session and flask.session["current_user"] \
+                                                   is not None else None
+
+    if account and "Admin" in account["roles"]:
+        return flask.render_template("/admin/add_user.html", message=message, roles=["Admin", "User"], account=account)
+    else:
+        return flask.redirect("/forbidden")
 
 
 @application.route("/addUser", methods=["POST"])
@@ -86,8 +104,8 @@ def postAddUser():
     if password_two == password_one:
         error_code = repository.insert_account(account_name, password_one, list_roles)
 
-    flask.session["message"] = f"<h3 id = 'success_message'> Successfully added account {account_name}! </h3>" \
-        if error_code == 1 else f"<h3 id = 'fail_message'> Error adding account {account_name}! </h3>"
+    flask.session["message"] = f"<p id = 'success_message'> Successfully added account {account_name}! </p>" \
+        if error_code == 1 else f"<p id = 'fail_message'> Error adding account {account_name}! </p>"
 
     return flask.redirect("/addUser")
 
@@ -97,19 +115,21 @@ def getSignIn():
     message = flask.session.pop("message") if "message" in flask.session and flask.session["message"] is not None \
         else None
 
-    return flask.render_template("sign_in.html", message=message)
+    account = flask.session.get("current_user") if "current_user" in flask.session and flask.session["current_user"] \
+                                                   is not None else None
+
+    return flask.render_template("sign_in.html", message=message, account=account)
 
 
 @application.route("/signIn", methods=["POST"])
 def postSignIn():
-
     str_password = flask.request.form["password"]
     str_username = flask.request.form["username"]
 
     fetched_account = repository.select_account_by_account_name(str_username)
     bool_match = bcrypt.checkpw(str_password.encode("utf-8"), fetched_account[2])
-    flask.session["message"] = f"<h3 id = 'success_message'> Successfully signed in account {str_username}! </h3>" \
-        if bool_match else f"<h3 id = 'fail_message'> Error signing into account {str_username}! </h3>"
+    flask.session["message"] = f"<p id = 'success_message'> Successfully signed in account {str_username}! </p>" \
+        if bool_match else f"<p id = 'fail_message'> Error signing into account {str_username}! </p>"
 
     if bool_match:
         new_user = {"username": fetched_account[1]}
@@ -123,6 +143,32 @@ def postSignIn():
 
     else:
         return flask.redirect("/signIn")
+
+
+@application.route("/signOut", methods=["GET"])
+def getSignOut():
+    account = flask.session.get("current_user") if "current_user" in flask.session and flask.session["current_user"] \
+                                                   is not None else None
+    if account:
+        str_username = account['username']
+        flask.session["current_user"] = None
+        message = f"<p class = neutral-message> User {str_username} signed out </p>"
+        flask.session["message"] = message
+    else:
+        message = f"<p class = neutral-message> No account currently signed in </p>"
+        flask.session["message"] = message
+
+    return flask.redirect("/")
+
+
+@application.route("/forbidden", methods=["GET"])
+def getForbidden():
+    return flask.render_template("forbidden.html")
+
+
+@application.errorhandler(404)
+def getError(error):
+    return flask.render_template("error.html")
 
 
 if __name__ == "__main__":
