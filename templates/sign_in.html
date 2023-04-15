@@ -1,55 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> Industrious Industries Job Applications - Sign In </title>
-    <script defer src = "../static/scripts/sign_in.js"></script>
-</head>
-<body>
-<header class = "flex-parent row space-between wide">
-    <h1 class = "flex-child font-large"> Industrious Industries </h1>
+{% extends "base_template.html" %}
 
-    <div class = "flex-child">
-    {% if account %}
+{% block title %} Industrious Industries Job Applications {% endblock %}
 
-        <a href = "/signOut"><button class = "link link-small"> Sign Out </button></a>
-
-    {% else %}
-
-        <a href = "/signIn"><button class = "link link-small"> Sign In </button></a>
-
-    {% endif %}
-    </div>
-</header>
-
-<main>
-    <h2> Please sign in below </h2>
+{% block main %}
+<main class = "flex-parent gap-small column start wide">
+    <h2 class = "font-large text-center"> Please sign in below </h2>
     {% if message %}
             {{ message|safe }}
     {% endif %}
+    <div class = "flex-parent column space-evenly gap-small wid"e>
+    <form method = post action = "/signIn" class = "flex-parent column space-evenly gap-small wide">
+        <label for  = "username" class = "font-middle text-left input-wide"> Enter Username: </label>
+        <div><input type = text required name = username id = username class = "input input-wide font-middle"></div>
 
-    <form method = post action = "/signIn">
-        <label for  = "username"> Enter Username: </label>
-        <div><input type = text name = username id = username></div>
+        <label for = "password" class = "font-middle text-left input-wide"> Enter Password: </label>
+        <div><input type = password required name = "password" id = "password" class = "input input-wide font-middle"></div>
 
-        <label for = "password"> Enter Password: </label>
-        <div><input type = text name = "password" id = "password"></div>
+        <div><input type = submit value = "Sign In" class = "link link-large"></div>
 
-        <div><input type = submit value = "Sign In"></div>
 
     </form>
-
-    {% if account and 'username' in account %}
-
-        <p class = user-message> Logged in as {{ account['username'] }} </p>
-
-    {% endif %}
     <nav>
-        <div><a href = "/"><button> Return to Index </button></a></div>
+        <div><a href = "/"><button class = "link link-large"> Return to Index </button></a></div>
     </nav>
+    </div>
 </main>
-
-<footer class = "flex-parent column center wide font-middle"><p> By Kyle Galway </p></footer>
-</body>
-</html>
+{% endblock %}

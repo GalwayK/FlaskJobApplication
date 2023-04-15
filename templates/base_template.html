@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel = stylesheet type = text/css href = "../static/styles/styles.css">
-    <title> Industrious Industries Job Applications </title>
+    {% block script %} {% endblock %}
+    <title> {% block title %}{% endblock %} </title>
 </head>
 <body class = "flex-parent column space-between">
 <header class = "flex-parent row space-between wide">
@@ -23,53 +24,10 @@
     </div>
 </header>
 
-<main class = "flex-parent gap-small column start wide">
-    <div class = "flex-parent column space-between wide font-middle">
-        {% if message %}
-
-                {{ message|safe }}
-
-        {% endif %}
-
-        {% if account %}
-
-            <h2> Welcome to Industrious Industries {{ account["username"] }}. </h2> <p> Please select an option below. </p>
-
-        {% else %}
-
-            <h2> Welcome. </h2> <p> Please sign in to proceed. </p>
-
-        {% endif %}
-    </div>
-    <div class = "flex-parent column gap-small space-evenly wide">
-        {% if account and ("Admin" in account["roles"] or "User" in account["roles"]) %}
-            <div><a href = "/submitApplication"><button class = "link link-large"> Submit a Job Application </button></a></div>
-        {% endif %}
-
-        {% if account and "Admin" in account["roles"] %}
-            <div><a href = "/viewApplications"><button class = "link link-large"> View Job Applications </button></a></div>
-            <div><a href = "/addUser"><button class = "link link-large"> Add User </button></a></div>
-        {% endif %}
-
-        {% if account %}
-
-            <div><a href = "/signOut"><button class = "link link-large"> Sign Out </button></a></div>
-
-        {% else %}
-
-            <div><a href = "/signIn"><button class = "link link-large"> Sign In </button></a></div>
-
-        {% endif %}
-
-
-    </div>
-    {% if account and 'username' in account %}
-
-        <p class = "user-message child-end"> Logged in as {{ account['username'] }} </p>
-
-    {% endif %}
-</main>
+{% block main %}
+{% endblock %}
 
 <footer class = "flex-parent column center wide font-middle"><p> By Kyle Galway </p></footer>
 </body>
 </html>
+

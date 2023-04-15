@@ -1,76 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel = stylesheet type = text/css href = "../static/styles/styles.css">
-    <title> Industrious Industries Job Applications - Submit </title>
-</head>
-<body class = "flex-parent column space-between">
-<header class = "flex-parent row space-between wide">
-    <h1 class = "flex-child font-large"> Industrious Industries </h1>
+{% extends "base_template.html" %}
 
-    <div class = "flex-child">
-    {% if account %}
+{% block title %} Industrious Industries Job Applications {% endblock %}
 
-        <a href = "/signOut"><button class = "link link-small"> Sign Out </button></a>
-
-    {% else %}
-
-        <a href = "/signIn"><button class = "link link-small"> Sign In </button></a>
-
-    {% endif %}
-    </div>
-</header>
-
-<main>
+{% block main %}
+<main class = "flex-parent gap-small column start wide">
     {% if message %}
-        {{ message }}
+        {{ message|safe }}
     {% endif %}
 
-    <form method = post action = "/submitApplication">
-        <h2> Please enter your job credentials here! </h2>
+    <h2> Please enter job credentials below </h2>
+    <div class = "flex-parent gap-small column start wide">
+        <form method = post action = "/submitApplication" class = "flex-parent gap-small column start wide">
+            <div id = "personal_information" class = "flex-parent gap-small column start wide">
+                <h3> Personal Information </h3>
+                <div class = "flex-parent row space-between form-middle">
+                    <label for = first_name class = "text-left font-middle"> First Name: </label>
+                    <input type = text class = "input input-middle font-middle" id = first_name name = first_name required>
+                </div>
 
-        <div>First Name:
-            <label for = first_name><input type = text class = "form-control" id = first_name name = first_name required></label>
-        </div>
+                <div class = "flex-parent row space-between form-middle">
+                    <label for = last_name class = "text-left font-middle"> Last Name: </label>
+                    <input class = "input input-middle font-middle" type = text id = last_name name = last_name required>
+                </div>
 
-        <div> Last Name:
-            <label for = last_name><input class = "form-control" type = text id = last_name name = last_name required></label>
-        </div>
+                <div class = "flex-parent row space-between form-middle">
+                    <label for = email class = "text-left font-middle"> Email: </label>
+                    <input class = "input input-middle font-middle" type = email id = email name = email required>
+                </div>
 
-        <div> Email:
-            <label for = email><input class = "form-control" type = email id = email name = email required></label>
-        </div>
+                <div class = "flex-parent row space-between form-middle">
+                    <label for = start_date class = "text-left font-middle"> Date: </label>
+                    <input class = "input input-middle font-middle" type = date id = start_date name = start_date required>
+                </div>
+            </div>
 
-        <div> Date:
-            <label for = start_date><input class = "form-control" type = date id = start_date name = start_date required></label>
-        </div>
+                <h3> Current Occupation </h3>
+                <div><label for = employed> Employed <input type = radio value = "employed" id = employed name = current_occupation required></label></div>
 
-        <div id = "current_occupation">
-            <label for = "current_occupation"> Current Occupation </label>
-            <div><label for = employed>Employed <input type = radio value = "employed" id = employed name = current_occupation required></label></div>
+                <div><label for = unemployed> Unemployed <input type = radio value = "unemployed" id = unemployed name = current_occupation required></label></div>
 
-            <div><label for = unemployed>Unemployed <input type = radio value = "unemployed" id = unemployed name = current_occupation required></label></div>
+                <div><label for = self-employed> Self-employed <input type = radio value = "self-employed" id = self-employed name = current_occupation required></label></div>
 
-            <div><label for = self-employed>Self-employed <input type = radio value = "self-employed" id = self-employed name = current_occupation required></label></div>
-        </div>
 
-        <div>
-            <input type = submit value = "Submit Application">
-        </div>
-    </form>
+            <div>
+                <input type = submit value = "Submit Application" class = "link link-large margin-top">
+            </div>
+        </form>
+
+        <nav>
+            <div><a href = "/"><button class = "link link-large"> Return to Index </button></a></div>
+        </nav>
+    </div>
     {% if account and 'username' in account %}
 
-        <p class = user-message> Logged in as {{ account['username'] }} </p>
+        <p class = "user-message child-end"> Logged in as {{ account['username'] }} </p>
 
     {% endif %}
-    <nav>
-        <div><a href = "/"><button> Return to Index </button></a></div>
-    </nav>
 </main>
-
-<footer class = "flex-parent column center wide font-middle"><p> By Kyle Galway </p></footer>
-
-</body>
-</html>
+{% endblock %}

@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> Industrious Industries Job Applications - Error </title>
-</head>
-<body>
-<header><h1> Industrious Industries Job Applications </h1></header>
-<main>
+{% extends "base_template.html" %}
+
+{% block title %} Industrious Industries Job Applications {% endblock %}
+
+{% block main %}
+<main class = "flex-parent column start">
     <h2> You have tried to access a page or resource which does not exist! </h2>
-    <nav>
-        <div><a href = "/"><button> Return to Index </button></a></div>
+    <nav class = "child-end">
+        <div><a href = "/"><button class = "link link-large"> Return to Index </button></a></div>
     </nav>
 </main>
-
-<footer><p> By Kyle Galway </p></footer>
-</body>
-</html>
+{% endblock %}

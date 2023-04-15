@@ -1,49 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> Industrious Industries Job Applications - View Applications </title>
-</head>
-<body>
-<header><h1> Industrious Industries Job Applications </h1></header>
+{% extends "base_template.html" %}
 
-<main>
+{% block title %} Industrious Industries Job Applications {% endblock %}
+
+{% block main %}
+<main class = "flex-parent gap-small column start wide">
     {% if applications|length > 0 %}
-    <table>
-        <tr>
-            <td> First Name </td>
-            <td> Last Name </td>
-            <td> Email </td>
-            <td> Start Date </td>
-            <td> Occupation </td>
-            <td> Accept Application </td>
+    <h3> All applications </h3>
+    <table class = "table">
+        <tr class = "table-header">
+            <th> First Name </th>
+            <th> Last Name </th>
+            <th> Email </th>
+            <th> Start Date </th>
+            <th> Occupation </th>
+            <th> Accept Application </th>
         </tr>
         {% for application in applications %}
         <tr>
-            <td> {{ application[0] }} </td>
             <td> {{ application[1] }} </td>
             <td> {{ application[2] }} </td>
             <td> {{ application[3] }} </td>
             <td> {{ application[4] }} </td>
-            <td><a href = "/acceptApplication"><button> Accept Application </button></a></td>
+            <td> {{ application[5].title() }} </td>
+            <td><a href = "/acceptApplication/{{ application[0] }}"><button class = "link link-middle"> Accept Application </button></a></td>
         </tr>
         {% endfor %}
     </table>
     {% else %}
         <h2> No Applications to Display! </h2>
     {% endif %}
-
+    <nav>
+        <div><a href = "/"><button class = "link link-large margin-top"> Return to Index </button></a></div>
+    </nav>
     {% if account and 'username' in account %}
 
-        <p class = user-message> Logged in as {{ account['username'] }} </p>
+        <p class = "user-message child-end"> Logged in as {{ account['username'] }} </p>
 
     {% endif %}
-    <nav>
-        <div><a href = "/"><button> Return to Index </button></a></div>
-    </nav>
 </main>
-
-<footer> By Kyle Galway </footer>
-</body>
-</html>
+{% endblock %}

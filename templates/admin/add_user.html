@@ -1,45 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> Industrious Industries Job Applications - Add Account </title>
-    <script defer src = "../static/scripts/add_user.js"></script>
-</head>
-<body>
-<header><h1> Industrious Industries Job Applications </h1></header>
+{% extends "base_template.html" %}
 
-<main>
+{% block title %} Industrious Industries Job Applications - Add Account {% endblock %}
+{% block script %} <script defer src = "../static/scripts/add_user.js"></script> {% endblock %}}
+{% block main %}
+<main class = "flex-parent gap-small column space-between wide">
     {% if message %}
             {{ message|safe }}
     {% endif %}
+    <h2> Enter account credentials below </h2>
+    <div class = "flex-parent gap-small column start wide">
+        <form method = post action = "/addUser" id = "add_user_form" class = "flex-parent gap-small column start form-wide">
+            <div class = "flex-parent row space-between wide"><label for = "account_name" class = "text-left font-middle"> Account Name: </label><input required type = text name = account_name id = account_name class = "input input-wide font-middle"></div>
+            <div class = "flex-parent row space-between wide"><label for = "passwordOne" class = "text-left font-middle"> Password: </label><input required type = password name = passwordOne id = passwordOne class = "input input-wide font-middle"></div>
+            <div class = "flex-parent row space-between wide"><label for = "passwordTwo" class = "text-left font-middle"> Re-enter Password:</label><input required type = password name = passwordTwo id = passwordTwo class = "input input-wide font-middle"></div>
+            <div class = "flex-parent row space-between wide">
+                <label for = roles> Select Account Roles: </label>
+                <select id = roles name = roles class = "input input-narrow font-middle">
+                    {% for role in roles %}
+                        <option value = "{{ role }}" id = "{{ role }}"> {{ role }} </option>
+                    {% endfor %}
+                </select>
+                <div><button id = "btn_add_role" value = "Add Role" class = "link link-small"> Add Role </button></div>
+            </div>
 
-    <form method = post action = "/addUser" id = "add_user_form">
-        <div><label for = "account_name"> Account Name: <input required type = text name = account_name id = account_name></label></div>
-        <div><label for = "passwordOne"> Password: <input required type = password name = passwordOne id = passwordOne></label></div>
-        <div><label for = "passwordTwo"> Re-enter Password: <input required type = password name = passwordTwo id = passwordTwo></label></div>
-        <div>
-            <label for = roles> Select Account Roles: <select id = roles name = roles>
-                {% for role in roles %}
-                    <option value = "{{ role }}" id = "{{ role }}"> {{ role }} </option>
-                {% endfor %}
-            </select></label>
-            <div><button id = "btn_add_role"> Add Role </button></div>
-        </div>
+            <ul id = "role_list" class = font-middle></ul>
+            <div><input type = submit value = "Add Account" id = "btn_add_account" class = "link link-large"></div>
+        </form>
+        <nav>
+            <div><a href = "/"><button class = "link link-large"> Return to Index </button></a></div>
+        </nav>
+    </div>
+   {% if account and 'username' in account %}
 
-        <ul id = "role_list"></ul>
-        <div><input type = submit value = "Add Account" id = "btn_add_account"></div>
-    </form>
-       {% if account and 'username' in account %}
-
-        <p class = user-message> Logged in as {{ account['username'] }} </p>
+        <p class = "user-message child-end"> Logged in as {{ account['username'] }} </p>
 
     {% endif %}
-    <nav>
-        <div><a href = "/"><button> Return to Index </button></a></div>
-    </nav>
-</main>
 
-<footer> By Kyle Galway </footer>
-</body>
-</html>
+</main>
+{% endblock %}

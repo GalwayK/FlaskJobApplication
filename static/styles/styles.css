@@ -5,7 +5,7 @@ body
     margin: 0px;
 }
 
-h1, h2
+h1, h2, h3
 {
     font-weight: 200;
 }
@@ -31,6 +31,52 @@ main
 .font-middle
 {
     font-size: 18px;
+}
+
+.font-small
+{
+    font-size: 16px;
+}
+
+.form-wide
+{
+    width: 30vw;
+}
+
+.form-middle
+{
+    width: 20vw;
+}
+
+.input
+{
+    height: 3vh;
+    border-radius: 7px;
+}
+
+.input-wide
+{
+    width: 40vh;
+}
+
+.input-narrow
+{
+    width: 20vh;
+}
+
+.input-middle
+{
+    width: 25vh;
+}
+
+.text-center
+{
+    text-align: center;
+}
+
+.text-left
+{
+    text-align: left;
 }
 
 .wide
@@ -110,6 +156,11 @@ main
     width: 25vh;
 }
 
+.link-middle
+{
+    width: 20vh;
+}
+
 .link-small
 {
     width: 15vh;
@@ -119,3 +170,23 @@ main
 {
     border: thin black solid;
 }
+
+.margin-top
+{
+    margin-top: 3vh;
+}
+
+.table
+{
+    border-radius: 8px;
+    border-collapse: collapse;
+}
+
+th, td
+{
+    border: 2px black solid;
+    border-radius: 9px;
+    padding: 1vh;
+}
+
+

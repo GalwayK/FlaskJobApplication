@@ -1,28 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel = stylesheet type = text/css href = "../static/styles/styles.css">
-    <title> Industrious Industries Job Applications </title>
-</head>
-<body class = "flex-parent column space-between">
-<header class = "flex-parent row space-between wide">
-    <h1 class = "flex-child font-large"> Industrious Industries </h1>
+{% extends "base_template.html" %}
 
-    <div class = "flex-child">
-    {% if account %}
+{% block title %} Industrious Industries Job Applications {% endblock %}
 
-        <a href = "/signOut"><button class = "link link-small"> Sign Out </button></a>
-
-    {% else %}
-
-        <a href = "/signIn"><button class = "link link-small"> Sign In </button></a>
-
-    {% endif %}
-    </div>
-</header>
-
+{% block main %}
 <main class = "flex-parent gap-small column start wide">
     <div class = "flex-parent column space-between wide font-middle">
         {% if message %}
@@ -69,7 +49,4 @@
 
     {% endif %}
 </main>
-
-<footer class = "flex-parent column center wide font-middle"><p> By Kyle Galway </p></footer>
-</body>
-</html>
+{% endblock %}
