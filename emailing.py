@@ -19,8 +19,6 @@ def send_application_email(first_name, last_name, email, start_date, occupation)
         Current Occupation: {occupation}
     """
         email_message.set_content(message_body)
-        print(PASSWORD)
-        print(email)
         gmail = smtplib.SMTP("smtp.gmail.com", 587)
         gmail.ehlo()
         gmail.starttls()

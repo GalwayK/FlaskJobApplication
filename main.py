@@ -9,12 +9,6 @@ import repository
 application = Flask(__name__)
 
 application.config["SECRET_KEY"] = os.getenv("flask_secret_key")
-application.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
-application.config["MAIL_SERVER"] = "smtp.gmail.com"
-application.config["MAIL_PORT"] = 465
-application.config["MAIL_USE_SSL"] = True
-application.config["MAIL_PASSWORD"] = os.getenv("work_application")
-application.config["MAIL_USERNAME"] = "kyligalway@gmail.com"
 
 
 @application.route("/", methods=["GET"])
@@ -45,7 +39,6 @@ def getSubmitApplication():
 def postSubmitApplication():
     first_name = flask.request.form["first_name"]
     last_name = flask.request.form["last_name"]
-    print(flask.request.form["start_date"])
     start_date = datetime.datetime.strptime(flask.request.form["start_date"], "%Y-%m-%d")
     email = flask.request.form["email"]
     occupation = flask.request.form["current_occupation"]
@@ -101,10 +94,6 @@ def postAddUser():
     password_one = flask.request.form["passwordOne"]
     password_two = flask.request.form["passwordTwo"]
     list_roles = flask.request.form["list_roles"].split(",")
-    print(account_name)
-    print(password_one)
-    print(password_two)
-    print(list_roles)
 
     error_code = 0
     if password_two == password_one:
@@ -143,7 +132,6 @@ def postSignIn():
         new_user["roles"] = []
         for account_role in account_roles:
             new_user["roles"].append(repository.read_role_name_by_role_id(account_role[1]))
-        print(new_user)
         flask.session["current_user"] = new_user
         return flask.redirect("/")
 
