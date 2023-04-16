@@ -12,15 +12,27 @@ h1, h2, h3
 
 header, footer
 {
-    border: thin black solid;
     min-height: 10vh;
     line-height: 1.5;
     font-size: 16px;
+    background-color: #0074bb;
+    color: #ffffff;
+}
+
+header
+{
+    border-bottom: #001522 3px solid;
+}
+
+footer
+{
+    border-top: #001522 3px solid;
 }
 
 main
 {
     min-height: 79vh;
+    background-color: #eef9ff;
 }
 
 .font-large
@@ -143,12 +155,17 @@ main
 {
     height: 5vh;
     font-size: 16px;
+    border: ##001522 2px solid;
     border-radius: 15px;
+    background-color: #0074bb;
+    color: #ffffff;
 }
 
 .link:hover
 {
     cursor: pointer;
+    background-color: #eef9ff;
+    color: #001522;
 }
 
 .link-large
@@ -164,6 +181,15 @@ main
 .link-small
 {
     width: 15vh;
+    background-color: #eef9ff !important;
+    color: #001522 !important;
+}
+
+.link-small:hover
+{
+    background-color: #0074bb !important;
+    color: #ffffff !important;
+    border-color: #eef9ff !important;
 }
 
 .bordered
@@ -189,4 +215,16 @@ th, td
     padding: 1vh;
 }
 
+@media (max-width: 800px)
+{
+    #header-button
+    {
+        display: none;
+    }
+
+    header
+    {
+        justify-content: center !important;
+    }
+}
 

@@ -75,6 +75,15 @@ def getViewApplications():
         return flask.redirect("/forbidden")
 
 
+@application.route("/acceptApplication/<application_id>", methods=["GET"])
+def getAcceptApplication(application_id):
+    repository.accept_application(application_id)
+
+    flask.session["message"] = f"Accepted application {application_id}"
+
+    return flask.redirect("/viewApplications")
+
+
 @application.route("/addUser", methods=["GET"])
 def getAddUser():
     message = flask.session.pop("message") if "message" in flask.session and flask.session["message"] is not None \
@@ -83,10 +92,7 @@ def getAddUser():
     account = flask.session.get("current_user") if "current_user" in flask.session and flask.session["current_user"] \
                                                    is not None else None
 
-    if account and "Admin" in account["roles"]:
-        return flask.render_template("/admin/add_user.html", message=message, roles=["Admin", "User"], account=account)
-    else:
-        return flask.redirect("/forbidden")
+    return flask.render_template("/admin/add_user.html", message=message, roles=["Admin", "User"], account=account)
 
 
 @application.route("/addUser", methods=["POST"])

@@ -22,7 +22,15 @@
             <td> {{ application[3] }} </td>
             <td> {{ application[4] }} </td>
             <td> {{ application[5].title() }} </td>
+            {% if application[6] %}
+
+            <td class = "font-middle text-center"> Application Accepted </td>
+
+            {% else %}
+
             <td><a href = "/acceptApplication/{{ application[0] }}"><button class = "link link-middle"> Accept Application </button></a></td>
+
+            {% endif %}
         </tr>
         {% endfor %}
     </table>

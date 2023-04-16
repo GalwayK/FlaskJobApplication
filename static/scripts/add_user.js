@@ -8,6 +8,9 @@ function addAndDisplayRole(event)
     const arrRoles = Array.from(setRoles);
     displayRoles(arrRoles);
     inputHidden.value = arrRoles;
+    console.log(setRoles);
+    console.log(arrRoles);
+    console.log(inputHidden.value)
 }
 
 function displayRoles(arrRoles)
@@ -25,10 +28,13 @@ function validateFieldsAndSubmit(event)
     event.preventDefault();
     const strPasswordOne = document.getElementById("passwordOne").value;
     const strPasswordTwo = document.getElementById("passwordTwo").value;
-    console.log(setRoles.length)
+    console.log(`Roles Length`, setRoles.size)
+    console.log(strPasswordOne)
+    console.log(strPasswordTwo)
+    console.log(inputHidden)
     if (strPasswordOne === strPasswordTwo && setRoles.size > 0)
     {
-        return true
+        formAddAccount.submit();
 //        formAddAccount.submit();
     }
     else
@@ -47,14 +53,14 @@ const selectRoles = document.getElementById("roles");
 const inputPasswordOne = document.getElementById("passwordOne");
 const inputPasswordTwo = document.getElementById("passwordTwo");
 const formAddAccount = document.getElementById("add_user_form");
-const divError = document.getElementById("error_message");
+const divError = document.getElementById("error-message");
 
-const strTemplateHidden = "<input type = 'hidden' id = list_roles name = list_roles></input>";
-formAddAccount.insertAdjacentHTML("beforeEnd", strTemplateHidden);
 const inputHidden = document.getElementById("list_roles");
-console.log(inputHidden)
 
 const setRoles = new Set();
 
-btnAddRole.addEventListener("click", addAndDisplayRole);
-btnAddAccount.addEventListener("submit", validateFieldsAndSubmit);
+if (btnAddRole)
+    btnAddRole.addEventListener("click", addAndDisplayRole);
+
+btnAddAccount.addEventListener("click", validateFieldsAndSubmit);
+console.log(btnAddAccount);

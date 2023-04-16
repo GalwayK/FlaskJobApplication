@@ -11,13 +11,14 @@
 <header class = "flex-parent row space-between wide">
     <h1 class = "flex-child font-large"> Industrious Industries </h1>
 
-    <div class = "flex-child">
+    <div class = "flex-child flex-parent row space-between gap-small" id = header-button>
     {% if account %}
 
         <a href = "/signOut"><button class = "link link-small"> Sign Out </button></a>
 
     {% else %}
 
+        <a href = "/addUser"><button class = "link link-small"> Sign Up </button></a>
         <a href = "/signIn"><button class = "link link-small"> Sign In </button></a>
 
     {% endif %}

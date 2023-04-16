@@ -5,8 +5,8 @@ import bcrypt
 def insert_application(first_name, last_name, email, start_date, occupation):
     connection = sqlite3.Connection("./instance/data.db")
     cursor = connection.cursor()
-    insert_statement = f"INSERT INTO APPLICATION (first_name, last_name, email, start_date, occupation) VALUES " \
-                       "(?, ?, ?, ?, ?)"
+    insert_statement = f"INSERT INTO APPLICATION (first_name, last_name, email, start_date, occupation, accepted) " \
+                       f"VALUES (?, ?, ?, ?, ?, false)"
     cursor.execute(insert_statement, [first_name, last_name, email, start_date, occupation])
     cursor.connection.commit()
     print(cursor.rowcount)
@@ -17,6 +17,14 @@ def select_applications():
     connection = sqlite3.Connection("./instance/data.db")
     select_statement = "SELECT * FROM APPLICATION"
     result = connection.execute(select_statement).fetchall()
+    return result
+
+
+def accept_application(application_id):
+    connection = sqlite3.Connection("./instance/data.db")
+    update_statement = "UPDATE APPLICATION SET accepted = 1 WHERE id = ?"
+    result = connection.execute(update_statement, (application_id,))
+    connection.commit()
     return result
 
 

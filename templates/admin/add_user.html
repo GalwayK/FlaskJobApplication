@@ -3,28 +3,43 @@
 {% block title %} Industrious Industries Job Applications - Add Account {% endblock %}
 {% block script %} <script defer src = "../static/scripts/add_user.js"></script> {% endblock %}}
 {% block main %}
-<main class = "flex-parent gap-small column space-between wide">
+<main class = "flex-parent gap-small column start wide">
     {% if message %}
             {{ message|safe }}
     {% endif %}
     <h2> Enter account credentials below </h2>
+    <div id = "error-message"></div>
     <div class = "flex-parent gap-small column start wide">
         <form method = post action = "/addUser" id = "add_user_form" class = "flex-parent gap-small column start form-wide">
+            <input type = 'hidden' id = list_roles name = list_roles>
             <div class = "flex-parent row space-between wide"><label for = "account_name" class = "text-left font-middle"> Account Name: </label><input required type = text name = account_name id = account_name class = "input input-wide font-middle"></div>
             <div class = "flex-parent row space-between wide"><label for = "passwordOne" class = "text-left font-middle"> Password: </label><input required type = password name = passwordOne id = passwordOne class = "input input-wide font-middle"></div>
             <div class = "flex-parent row space-between wide"><label for = "passwordTwo" class = "text-left font-middle"> Re-enter Password:</label><input required type = password name = passwordTwo id = passwordTwo class = "input input-wide font-middle"></div>
+
             <div class = "flex-parent row space-between wide">
                 <label for = roles> Select Account Roles: </label>
                 <select id = roles name = roles class = "input input-narrow font-middle">
-                    {% for role in roles %}
-                        <option value = "{{ role }}" id = "{{ role }}"> {{ role }} </option>
-                    {% endfor %}
+
+                    {% if account and "Admin" in account["roles"] %}
+
+                        {% for role in roles %}
+
+                            <option value = "{{ role }}" id = "{{ role }}"> {{ role }} </option>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <option value = "User" id = "User"> User </option>
+
+                    {% endif %}
                 </select>
                 <div><button id = "btn_add_role" value = "Add Role" class = "link link-small"> Add Role </button></div>
             </div>
 
             <ul id = "role_list" class = font-middle></ul>
-            <div><input type = submit value = "Add Account" id = "btn_add_account" class = "link link-large"></div>
+
+            <div><input type = button value = "Add Account" id = "btn_add_account" class = "link link-large"></div>
         </form>
         <nav>
             <div><a href = "/"><button class = "link link-large"> Return to Index </button></a></div>

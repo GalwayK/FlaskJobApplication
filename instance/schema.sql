@@ -28,7 +28,8 @@ CREATE TABLE APPLICATION
     last_name varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
     start_date date NOT NULL,
-    occupation varchar(255) NOT NULL
+    occupation varchar(255) NOT NULL,
+    accepted boolean NOT NULL
 );
 
 INSERT INTO ROLE (role_name) values ("Admin"), ("User");
