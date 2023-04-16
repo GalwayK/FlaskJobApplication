@@ -171,4 +171,4 @@ def getError(error):
 
 if __name__ == "__main__":
     with application.app_context():
-        application.run(debug=True, port=5001)
+        application.run(debug=True)
