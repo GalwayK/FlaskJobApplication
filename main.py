@@ -1,4 +1,6 @@
 import os
+import random
+import string
 import datetime
 import bcrypt
 import flask
@@ -8,7 +10,9 @@ import repository
 
 application = Flask(__name__)
 
-application.config["SECRET_KEY"] = os.getenv("flask_secret_key")
+# application.config["SECRET_KEY"] = os.getenv("flask_secret_key")
+
+application.config["SECRET_KEY"] = "".join(random.choice(string.ascii_letters) for i in range(10))
 
 
 @application.route("/", methods=["GET"])
