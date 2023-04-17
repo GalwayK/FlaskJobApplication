@@ -47,7 +47,7 @@ In addition to a modern Python installation, this application requires a number 
 these packages, it is recommended to create a new virtual environment using python -m venv env. To use this virtual 
 environment on Windows, run env/Scripts/activate.bat on the command line, or on Linux, run source env/bin/activate. 
 
-To install the neccessary packages into this virtual environment, run pip install -m requirements.txt on the command 
+To install the neccessary packages into this virtual environment, run pip install -r requirements.txt on the command 
 line or terminal.
 
 # Default Users 
